@@ -1,6 +1,6 @@
 import { alumni1, alumni2 } from "assets/images/alumni";
 
-export const alumni = [
+export const alumniMock = [
   {
     title: "Card Title",
     description:

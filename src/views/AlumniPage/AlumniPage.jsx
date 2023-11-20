@@ -4,6 +4,8 @@ import {
   ALUMNI_LIST_HEADER,
   FILTER_BUTTONS,
   SEARCH_INPUT,
+  alumniListMock,
+  alumniMock
   // ALUMNI_PAGE_LAYOUTS,
 } from "constants/alumniConstants";
 import { Footer, Navbar } from "layouts";
@@ -24,19 +26,22 @@ const AlumniPage = () => {
   const achievements = useRef([]);
 
   useEffect(() => {
-    const fetchData = async (cat) => {
-      if (cat === "daftar-alumni") {
-        const alumniResponseData = await getAllAlumni();
-        alumniList.current = alumniResponseData;
-      } else if (cat === "pencapaian-alumni") {
-        const achievementsResponseData = await getAllAchievements();
-        achievements.current = achievementsResponseData;
-      }
-      setIsLoading(false);
-    };
-
-    setIsLoading(true);
-    fetchData(category);
+    // const fetchData = async (cat) => {
+    //   if (cat === "daftar-alumni") {
+    //     const alumniResponseData = await getAllAlumni();
+    //     alumniList.current = alumniResponseData;
+    //   } else if (cat === "pencapaian-alumni") {
+      //     const achievementsResponseData = await getAllAchievements();
+      //     achievements.current = achievementsResponseData;
+      //   }
+      //   setIsLoading(false);
+      // };
+      
+      // setIsLoading(true);
+      // fetchData(category);
+    alumniList.current = [...alumniListMock];
+    achievements.current = [...alumniMock];
+    setIsLoading(false);
   }, [category]);
 
   if (isLoading) return <LoadingPage />;
@@ -59,14 +64,18 @@ const AlumniPage = () => {
         ) : (
           <section className="flex flex-col items-center w-full max-w-[1150px] gap-6 sm:gap-8">
             {achievements.current.map((achievement) => {
-              const { nama, deskripsi, image, id } = achievement;
+              // const { nama, deskripsi, image, id } = achievement;
               return (
                 <AchievementCard
-                  title={nama}
-                  description={deskripsi}
-                  img={image}
-                  key={id}
+                  {...achievement}
+                  key={achievement}
                 />
+                // <AchievementCard
+                //   title={nama}
+                //   description={deskripsi}
+                //   img={image}
+                //   key={id}
+                // />
               );
             })}
           </section>

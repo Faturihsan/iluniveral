@@ -5,7 +5,9 @@ import { dashboardHeader } from "assets/images";
 import AlumniCard from "./components/AlumniCard";
 import { Button, EventCard } from "components";
 import LoadingPage from "views/LoadingPage";
-import { getAllAchievements, getAllEvents } from "utils/fetch";
+import { eventsMock } from "constants/eventsConstant";
+import { alumniMock } from "constants/dashboardConstant";
+// import { getAllAchievements, getAllEvents } from "utils/fetch";
 
 const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,14 +15,17 @@ const DashboardPage = () => {
   const achievements = useRef([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const eventsResponseData = await getAllEvents();
-      const achievementsResponseData = await getAllAchievements();
-      events.current = eventsResponseData;
-      achievements.current = achievementsResponseData;
+    // const fetchData = async () => {
+    //   const eventsResponseData = await getAllEvents();
+    //   const achievementsResponseData = await getAllAchievements();
+    //   events.current = eventsResponseData;
+    //   achievements.current = achievementsResponseData;
+    //   setIsLoading(false);
+    // };
+    // fetchData();
+    events.current = [...eventsMock];
+    achievements.current = [...alumniMock];
       setIsLoading(false);
-    };
-    fetchData();
   }, []);
 
   if (isLoading) return <LoadingPage />;
@@ -42,13 +47,10 @@ const DashboardPage = () => {
           </h1>
           <div className="flex flex-col items-center gap-10">
             {achievements.current.slice(0, 2).map((obj) => {
-              const { id, nama, deskripsi, image } = obj;
               return (
                 <AlumniCard
-                  title={nama}
-                  description={deskripsi}
-                  img={image}
-                  key={id}
+                  {...obj}
+                  key={obj}
                 />
               );
             })}
@@ -66,22 +68,10 @@ const DashboardPage = () => {
           </h1>
           <div className="flex flex-wrap justify-center w-full gap-10">
             {events.current.slice(0, 3).map((event) => {
-              const { id, image, deskripsi, nama, lokasi, tggl_mulai } = event;
-              const date = new Date(tggl_mulai);
               return (
                 <EventCard
-                  id={id}
-                  img={image}
-                  title={nama}
-                  description={deskripsi}
-                  date={date.toLocaleString("id-ID", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                  location={lokasi}
-                  author="admin"
-                  key={id}
+                  {...event}
+                  key={event}
                 />
               );
             })}

@@ -23,7 +23,7 @@ export const SEARCH_INPUT = {
   onSearch: () => {},
 }
 
-export const events = [
+export const eventsMock = [
   {
     img: eventImg,
     title: "Legacy Lecture SeriesLegacy Lecture SeriesLegacy Lecture Series",

@@ -45,7 +45,9 @@ export const ALUMNI_LIST_HEADER = [
   },
 ];
 
-export const alumni = [
+export const alumniListMock = []
+
+export const alumniMock = [
   {
     title: "Card Title",
     description:

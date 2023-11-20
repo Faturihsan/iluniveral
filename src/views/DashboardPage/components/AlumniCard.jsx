@@ -7,7 +7,8 @@ const AlumniCard = ({ title, description, img, id }) => {
   return (
     <div className="w-full flex gap-6 odd:flex-row-reverse max-w-[1300px] smd:flex-col smd:h-fit smd:odd:flex-col smd:items-center">
       <div className="w-[490px] h-[300px] rounded-lg overflow-hidden shrink-0 lg:w-[400px] lg:h-[300px] smd:max-w-[350px]">
-        <img src={`https://admin.iluniveral.id/app/src/assets/images/upload/achievements/${img}`} alt="foto alumni" className="w-[100%]" />
+        {/* <img src={`https://admin.iluniveral.id/app/src/assets/images/upload/achievements/${img}`} alt="foto alumni" className="w-[100%]" /> */}
+        <img src={img} alt="foto alumni" className="w-[100%]" />
       </div>
       <div className="flex flex-col w-full gap-4">
         <h2 className={`${styles.headingM} text-primary-40`}>{title}</h2>

@@ -3,23 +3,29 @@ import { EventCard } from "components";
 import { FilterCards } from "features";
 import { Navbar, Footer } from "layouts";
 import { LoadingPage } from "views";
-import { FILTER_BUTTONS, SEARCH_INPUT } from "constants/eventsConstant";
-import { getAllEvents } from "utils/fetch";
+import {
+  FILTER_BUTTONS,
+  SEARCH_INPUT,
+  eventsMock,
+} from "constants/eventsConstant";
+// import { getAllEvents } from "utils/fetch";
 import { styles } from "styles";
 
 const EventsPage = () => {
-  const [beginSlice, setBeginSlice] = useState(0);
-  const [endSlice, setEndSlice] = useState(9);
+  // const [beginSlice, setBeginSlice] = useState(0);
+  // const [endSlice, setEndSlice] = useState(9);
   const [isLoading, setIsLoading] = useState(true);
   const events = useRef([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const responseData = await getAllEvents();
-      events.current = responseData;
-      setIsLoading(false);
-    };
-    fetchData();
+    // const fetchData = async () => {
+    //   const responseData = await getAllEvents();
+    //   events.current = responseData;
+    //   setIsLoading(false);
+    // };
+    // fetchData();
+    events.current = [...eventsMock];
+    setIsLoading(false);
   }, []);
 
   if (isLoading) return <LoadingPage />;
@@ -37,23 +43,27 @@ const EventsPage = () => {
           containerClassName="w-full max-w-[1150px]"
         />
         <section className="flex flex-wrap gap-10 w-full max-w-[1150px] justify-center">
-          {events.current.slice(beginSlice, endSlice).map((event) => {
-            const { id, image, deskripsi, nama, lokasi, tggl_mulai } = event;
-            const date = new Date(tggl_mulai);
+          {events.current.map((event) => {
+            // const { id, image, deskripsi, nama, lokasi, tggl_mulai } = event;
+            // const date = new Date(tggl_mulai);
             return (
+              // <EventCard
+              //   id={id}
+              //   img={image}
+              //   title={nama}
+              //   description={deskripsi}
+              //   date={date.toLocaleString("id-ID", {
+              //     day: "numeric",
+              //     month: "long",
+              //     year: "numeric",
+              //   })}
+              //   location={lokasi}
+              //   author="admin"
+              //   key={id}
+              // />
               <EventCard
-                id={id}
-                img={image}
-                title={nama}
-                description={deskripsi}
-                date={date.toLocaleString("id-ID", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-                location={lokasi}
-                author="admin"
-                key={id}
+                {...event}
+                key={event}
               />
             );
           })}
